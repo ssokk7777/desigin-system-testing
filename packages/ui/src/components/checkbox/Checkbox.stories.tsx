@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import type { StoryObj } from '@storybook/react'
 import { Checkbox } from './Checkbox'
 import { CheckboxProps } from './Checkbox'
 import StoryTemplate from '@kt-cloud-front/ui/common/StoryTemplate'
+import {userEvent, within} from "@storybook/test"
+import { expect } from '@storybook/jest'
 
 const colorOptions = ['primary', 'secondary', 'success', 'error', 'warning'] as const
 const sizeOptions = ['small', 'medium', 'large'] as const
@@ -23,7 +25,9 @@ const meta: IMeta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs', '!dev'],
+  tags: ['autodocs',
+    // '!dev'
+  ],
   args: {
 
   },
@@ -46,7 +50,36 @@ type Story = StoryObj<CheckboxProps>
 export const Default: Story = {
   args: {
     label: 'checkbox',
-  }
+  },
+  render: (args) => {
+
+    const handleClick = () => {
+      console.log('onChange')
+    };
+
+    return (
+      <Checkbox {...args}
+              onChange={handleClick}
+      />
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // 1. 기본 checkbox 쿼리
+    const checkbox = canvas.getByRole('checkbox', { name: 'checkbox' }); // 더 구체적인 접근 방식 사용
+
+    // 2. 초기 상태 확인
+    expect(checkbox).not.toBeChecked();
+
+    // 3. checkbox 클릭하여 상태 변경
+    await userEvent.click(checkbox);
+    expect(checkbox).toBeChecked();
+
+    // 4. checkbox 다시 클릭하여 상태 초기화
+    await userEvent.click(checkbox);
+    expect(checkbox).not.toBeChecked();
+  },
 }
 
 export const Indeterminate: { render: () => void } = {

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { StoryObj } from '@storybook/react'
 import { Button } from './Button'
 import { ButtonProps } from './Button'
 import { TrashIcon } from '@storybook/icons'
 import StoryTemplate from '@kt-cloud-front/ui/common/StoryTemplate'
+import {userEvent, within} from "@storybook/test";
+import { expect } from '@storybook/jest';
 
 const colorOptions = ['primary', 'secondary', 'success', 'error', 'warning'] as const
 const sizeOptions = ['small', 'medium', 'large'] as const
@@ -24,7 +26,9 @@ const meta: IMeta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs', '!dev'],
+  tags: ['autodocs',
+    // '!dev'
+  ],
   args: {
     label: 'Button',
   },
@@ -72,7 +76,35 @@ type Story = StoryObj<ButtonProps>
 export const Default: Story = {
   args: {
     label: 'Button',
-    onClick: () => alert('IconButton clicked'),
+    variant: 'filled',
+    // onClick: () => alert('IconButton clicked'),
+  },
+  render: (args) => {
+    const [click, setClick] = useState(false);
+
+    const handleClick = () => {
+      setClick(!click);
+    };
+
+    return (
+      <Button {...args}
+              onClick={handleClick}
+              variant={click ? 'outlined' : args.variant}
+      />
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: 'Button' }); // 더 구체적인 접근 방식 사용
+
+    // 클릭 전에 클래스가 올바른지 확인
+    await expect(button).toHaveClass(`button-filled-primary`);
+
+    // 버튼 클릭
+    await userEvent.click(button);
+
+    // 클릭 후 클래스 변경 확인
+    await expect(button).toHaveClass(`button-outlined-primary`);
   },
 }
 
