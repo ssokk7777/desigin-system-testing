@@ -1,3 +1,16 @@
-import { StorybookConfig } from '@storybook/react-vite';
-declare const config: StorybookConfig;
+declare const config: {
+    features: {
+        interactionsDebugger: boolean;
+    };
+    stories: string[];
+    framework: {
+        name: any;
+        options: {};
+    };
+    addons: any[];
+    typescript: {
+        check: boolean;
+        reactDocgen: string;
+    };
+};
 export default config;
