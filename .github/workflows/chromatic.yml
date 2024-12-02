@@ -27,6 +27,9 @@ jobs:
           path: "**/node_modules"
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-storybook
 
+      - name: npm Install dependencies
+        run: npm install
+
       - name: depedency install
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
