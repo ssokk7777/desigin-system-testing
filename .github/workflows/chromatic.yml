@@ -35,4 +35,6 @@ jobs:
         uses: chromaui/action@latest
         with:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
-          run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --output-dir=./storybook-static
+          run: npx chromatic --output-dir=./storybook-static
+          env:
+            CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
