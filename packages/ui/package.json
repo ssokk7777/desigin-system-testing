@@ -10,7 +10,8 @@
     "build-package": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test-storybook": "test-storybook"
+    "test-storybook": "test-storybook",
+    "chromatic": "npx chromatic --project-token=chpt_d1fce7aad28ffc7"
   },
   "files": [
     "dist"
@@ -77,7 +78,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kt-cloud-front/ui.git"
+    "url": "git+https://github.com/kt-cloud-front/ui.git"
   },
   "publishConfig": {
     "access": "public",
@@ -86,5 +87,9 @@
   "volta": {
     "node": "20.17.0",
     "npm": "10.8.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/kt-cloud-front/ui/issues"
+  },
+  "homepage": "https://github.com/kt-cloud-front/ui#readme"
 }

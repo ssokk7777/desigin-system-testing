@@ -69,8 +69,6 @@ $colors: (
 @mixin radio-size($width, $height, $top, $left, $checked-width, $checked-height) {
   width: $width;
   height: $height;
-  //top: $top;
-  //left: $left;
 
   &:checked::after {
     content: '';
@@ -84,7 +82,7 @@ $colors: (
 .storybook-radio-size {
   &-small { @include radio-size(18px, 18px, -1px, 3px, 8px, 8px) }
   &-medium { @include radio-size(20px, 20px, 1px, 3px, 10px, 10px) }
-  &-large { @include radio-size(23px, 23px, 3px, 3px, 13px, 13px) }
+  &-large { @include radio-size(23px, 23px, 2.5px, 4.5px, 10px, 10px) }
 }
 
 /* font size------------------------------------ */

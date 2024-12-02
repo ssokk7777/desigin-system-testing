@@ -14,8 +14,8 @@
     ],
     "module": "ESNext",
     "moduleResolution": "bundler",
-    // "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": false,
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true,
     "noEmit": false,
     "declaration": true,
     "outDir": "dist",
@@ -52,5 +52,3 @@
     ".turbo"
   ]
 }
-
-
