@@ -22,10 +22,11 @@ jobs:
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
         run: npm ci
+             npm list --depth=3  # 디버깅을 위한 의존성 리스트 출력
 
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDirectory: "packages/ui"
+          # workingDirectory: "packages/ui"
