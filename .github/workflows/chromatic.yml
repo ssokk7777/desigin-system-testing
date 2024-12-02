@@ -29,7 +29,7 @@ jobs:
 
       - name: depedency install
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install & npm ci
+        run: npm ci
 
       - name: publish to chromatic
         id: chromatic
