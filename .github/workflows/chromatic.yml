@@ -19,14 +19,21 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
-        run: npm ci
+      - name: Clean up and install dependencies
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+          npm ci
+
+      - name: Install rollup
+        run: npm install rollup
+
+      - name: Build Storybook
+        run: npm run build-storybook
 
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
-          # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           buildScriptName: "build-storybook"
-          workingDirectory: "packages/ui"
+          buildDir: "./storybook-static"
