@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "tsc -b && vite build && storybook build",
-    "build-storybook": "storybook build --output-dir=./storybook-static",
+    "build-storybook": "storybook build -- --output-dir=./storybook-static",
     "build-package": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -87,9 +87,5 @@
   "volta": {
     "node": "20.17.0",
     "npm": "10.8.2"
-  },
-  "bugs": {
-    "url": "https://github.com/kt-cloud-front/ui/issues"
-  },
-  "homepage": "https://github.com/kt-cloud-front/ui#readme"
+  }
 }
