@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "build-storybook": "./node_modules/.bin/turbo build-storybook -- -- --output-dir=/tmp/chromatic",
+    "build-storybook": "turbo build-storybook -- -- --output-dir=/tmp/chromatic",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
