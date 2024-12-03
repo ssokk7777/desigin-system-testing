@@ -27,6 +27,6 @@ jobs:
         uses: chromaui/action@latest
         with:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
-          workingDirectory: "packages/ui/src"
+          workingDir: "packages/ui"
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
