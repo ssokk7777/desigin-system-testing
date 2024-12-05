@@ -1,9 +1,9 @@
 name: 'UI Tests'
 
 on:
-  pull_request:
+  push:
     branch:
-     - dev
+     - interaction
 
 jobs:
   # Run interaction and accessibility tests
