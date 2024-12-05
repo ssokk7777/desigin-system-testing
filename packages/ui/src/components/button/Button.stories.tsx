@@ -104,7 +104,7 @@ export const Default: Story = {
     await userEvent.click(button);
 
     // 클릭 후 클래스 변경 확인
-    await expect(button).toHaveClass(`button-standard-primary`);
+    await expect(button).toHaveClass(`button-outlined-primary`);
   },
 }
 
