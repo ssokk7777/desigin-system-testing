@@ -3,7 +3,7 @@ name: 'UI Tests'
 on:
   push:
     branch:
-      - interaction
+     - interaction
 
 jobs:
   # Run interaction and accessibility tests
@@ -28,6 +28,7 @@ jobs:
 
       - name: Install Playwright
         env:
+          PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
         run: npx playwright install
         working-directory: packages/ui
 
