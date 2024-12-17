@@ -20,4 +20,6 @@ jobs:
       - name: Cypress run
         run: |
           cd /home/runner/work/design-system-testing/design-system-testing/packages/ui
-          npx cypress run --browser chrome
+          npm run cypress
+        with:
+          browser: chrome
