@@ -12,18 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
+        run: npm install
+      - name: Start development server
         run: |
-          # 루트 디렉토리에서 npm install 실행
-          npm install
-      - name: Debug information
-        run: |
-          echo "Checking directory contents:"
-          ls -R /home/runner/work/design-system-testing/design-system-testing/packages/ui/cypress/e2e/
+          cd /home/runner/work/design-system-testing/design-system-testing/packages/ui
+          npm run dev & npx wait-on http://localhost:6006
       - name: Cypress run
         run: |
           cd /home/runner/work/design-system-testing/design-system-testing/packages/ui
-          npx cypress run --config-file packages/ui/cypress.config.js --spec 'packages/ui/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}' --record false --publish-summary true --component false
-        env:
-          CYPRESS_START: npm run dev
-          CYPRESS_WAIT_ON: http://localhost:6006
-          CYPRESS_WAIT_ON_TIMEOUT: 120
+          npx cypress run --config-file packages/ui/cypress.config.js --spec 'packages/ui/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}' --record false
