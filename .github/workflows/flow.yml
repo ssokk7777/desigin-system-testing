@@ -20,4 +20,4 @@ jobs:
       - name: Cypress run
         run: |
           cd /home/runner/work/design-system-testing/design-system-testing/packages/ui
-          npm run cypress
+          npx cypress run
