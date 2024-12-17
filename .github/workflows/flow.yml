@@ -12,19 +12,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
-        run: npm install
-      - name: Debug information
-        run: |
-          echo "Checking directory contents:"
-          ls -R /home/runner/work/design-system-testing/design-system-testing/packages/ui/cypress/e2e/
+        run: | 
+            npm install
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          start: npm run dev
-          wait-on: http://localhost:6006
-          wait-on-timeout: 120
-          config-file: packages/ui/cypress.config.js  # 기존 설정 그대로 유지
-          record: false
-          publish-summary: true
-          component: false
-          spec: 'packages/ui/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'  # 테스트
+          working-directory: /home/runner/work/design-system-testing/design-system-testing/packages/ui  # packages/ui 디렉토리로 이동
+          with:
+            start: npm run dev
