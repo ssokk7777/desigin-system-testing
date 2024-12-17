@@ -18,5 +18,4 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           working-directory: /home/runner/work/design-system-testing/design-system-testing/packages/ui  # packages/ui 디렉토리로 이동
-          with:
-            start: npm run dev
+          start: npm run dev
