@@ -17,4 +17,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm run dev
-          working-directory: packages/ui
+          config-file: packages/ui/cypress.config.ts
+          record: false
+          publish-summary: true
+          component: false
