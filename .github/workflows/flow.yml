@@ -12,8 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
-        run: | 
-            npm install
+        run: |
+          # 루트 디렉토리에서 npm install 실행
+          npm install
+      - name: Debug information
+        run: |
+          echo "Checking directory contents:"
+          ls -R /home/runner/work/design-system-testing/design-system-testing/packages/ui/cypress/e2e/
       - name: Cypress run
         working-directory: /home/runner/work/design-system-testing/design-system-testing/packages/ui  # packages/ui 디렉토리로 이동
         uses: cypress-io/github-action@v6
