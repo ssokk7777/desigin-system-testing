@@ -13,6 +13,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Install dependencies
         run: npm install
+      - name: Debug information
+        run: |
+          echo "Checking directory contents:"
+          ls -R /home/runner/work/design-system-testing/design-system-testing/packages/ui/cypress/e2e/
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
