@@ -21,4 +21,4 @@ jobs:
           record: false
           publish-summary: true
           component: false
-          spec-pattern: 'packages/ui/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'  # 테스트
+          spec: 'packages/ui/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'  # 테스트
