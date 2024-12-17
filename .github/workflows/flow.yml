@@ -20,4 +20,4 @@ jobs:
       - name: Cypress run
         run: |
           cd /home/runner/work/design-system-testing/design-system-testing/packages/ui
-          npx cypress run --config-file packages/ui/cypress.config.js --spec 'packages/ui/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}' --record false
+          npx cypress run
