@@ -18,4 +18,12 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           working-directory: /home/runner/work/design-system-testing/design-system-testing/packages/ui  # packages/ui 디렉토리로 이동
-          start: npm run dev
+          with:
+            start: npm run dev
+            wait-on: http://localhost:6006
+            wait-on-timeout: 120
+            config-file: packages/ui/cypress.config.js  # 기존 설정 그대로 유지
+            record: false
+            publish-summary: true
+            component: false
+            spec: 'packages/ui/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'  # 테스트
