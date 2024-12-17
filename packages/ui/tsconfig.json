@@ -42,7 +42,8 @@
     "src/**/*.tsx",
     "src/**/*.stories.ts",
     "src/**/*.stories.tsx",
-    ".storybook/*.ts"
+    ".storybook/*.ts",
+    "**/*.ts",
   ],
   "exclude": [
     "dist",
