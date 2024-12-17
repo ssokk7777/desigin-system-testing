@@ -20,14 +20,10 @@ jobs:
           echo "Checking directory contents:"
           ls -R /home/runner/work/design-system-testing/design-system-testing/packages/ui/cypress/e2e/
       - name: Cypress run
-        working-directory: /home/runner/work/design-system-testing/design-system-testing/packages/ui  # packages/ui 디렉토리로 이동
-        uses: cypress-io/github-action@v6
-        with:
-          start: npm run dev
-          wait-on: http://localhost:6006
-          wait-on-timeout: 120
-          config-file: packages/ui/cypress.config.js  # 기존 설정 그대로 유지
-          record: false
-          publish-summary: true
-          component: false
-          spec: 'packages/ui/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}'  # 테스트
+        run: |
+          cd /home/runner/work/design-system-testing/design-system-testing/packages/ui
+          npx cypress run --config-file packages/ui/cypress.config.js --spec 'packages/ui/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}' --record false --publish-summary true --component false
+        env:
+          CYPRESS_START: npm run dev
+          CYPRESS_WAIT_ON: http://localhost:6006
+          CYPRESS_WAIT_ON_TIMEOUT: 120
