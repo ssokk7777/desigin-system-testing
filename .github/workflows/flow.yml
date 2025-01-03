@@ -1,9 +1,9 @@
 name: Cypress Tests
 
 on:
-  push:
-    branch:
-      - user-flow
+  pull_request:
+    branches:
+      - dev
 
 jobs:
   interaction-and-accessibility:
