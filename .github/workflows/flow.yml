@@ -1,0 +1,56 @@
+name: Cypress Tests
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  interaction-and-accessibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Cache Playwright dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install Playwright
+        run: npx playwright install
+        working-directory: packages/ui
+
+      - name: Build Storybook
+        working-directory: packages/ui
+        run: npm run build-storybook --quiet
+
+      - name: Serve Storybook and run tests
+        working-directory: packages/ui
+        run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 6006 --silent" \
+            "npx wait-on tcp:6006 && npm run test-storybook"
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
+      - name: Start development server
+        run: |
+          cd /home/runner/work/design-system-testing/design-system-testing/packages/ui
+          npm run dev & npx wait-on http://localhost:6006
+      - name: Cypress run
+        run: |
+          cd /home/runner/work/design-system-testing/design-system-testing/packages/ui
+          npx cypress run

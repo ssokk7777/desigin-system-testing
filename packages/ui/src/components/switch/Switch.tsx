@@ -1,4 +1,4 @@
-import React, {ReactNode, useState} from 'react'
+import React, {useState} from 'react'
 import './switch.scss'
 
 export interface SwitchProps {
@@ -14,23 +14,25 @@ export interface SwitchProps {
 
 export const Switch = (
   {
-   color = 'primary',
-   checked,
-   defaultChecked = false,
-   disabled = false,
-   label,
-   name,
-   size = 'medium',
-   onChange,
+     color = 'primary',
+     checked,
+     defaultChecked = false,
+     disabled = false,
+     label,
+     name,
+     size = 'medium',
+     onChange,
      ...props
   }: SwitchProps) => {
 
   // 내부 상태로 checked 값을 관리
   const [internalChecked, setInternalChecked] = useState<boolean>(defaultChecked ?? false)
+  const isControlled = checked !== undefined;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = e.target.checked
-    setInternalChecked(newChecked) // 내부 상태 업데이트
+    if(!isControlled) {
+      setInternalChecked(e.target.checked) // 내부 상태 업데이트
+    }
     if (onChange) {
       onChange(e)
     }
@@ -49,10 +51,9 @@ export const Switch = (
           `switch-color-${color}`,
           `storybook-switch-size-${size}`
         ].join(' ')}
-        checked={checked !== undefined ? checked : internalChecked} // 외부에서 받은 checked 값 또는 내부 상태 사용
-        {...(checked === undefined ? { defaultChecked: !!defaultChecked } : {})}
+        checked={isControlled ? checked ?? false : internalChecked} // 외부에서 받은 checked 값 또는 내부 상태 사용
         disabled={!!disabled}
-        name={name}
+        name={name || ''}
         onChange={handleChange}
       />
       <span>{label}</span>
